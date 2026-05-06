@@ -21,7 +21,12 @@ app.UseRouting();
 app.UseSession();
 
 app.MapControllerRoute(
+    name: "login",
+    pattern: "",
+    defaults: new { controller = "Usuarios", action = "Login" });
+
+app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Usuarios}/{action=Login}/{id?}");
+    pattern: "{controller}/{action=Index}/{id?}");
 
 app.Run();
