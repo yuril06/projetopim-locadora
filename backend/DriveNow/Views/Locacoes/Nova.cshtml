@@ -1,0 +1,76 @@
+@model DriveNow.Models.Locacao
+@{
+    ViewBag.Title = "Nova Locacao";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alerta erro" style="margin:20px 30px 0;">&#9888; @ViewBag.Erro</div>
+}
+
+<div class="form-wrap">
+    @using (Html.BeginForm("Nova", "Locacoes", FormMethod.Post))
+    {
+        <div class="form-grupo">
+            <label>Cliente *</label>
+            @Html.DropDownListFor(
+                m => m.IdCliente,
+                (List<SelectListItem>)ViewBag.Clientes,
+                "-- Selecione um cliente --",
+                new { @class = "form-control" }
+            )
+        </div>
+
+        <div class="form-grupo">
+            <label>Veiculo Disponivel *</label>
+            <select id="IdVeiculo" name="IdVeiculo" class="form-control" onchange="calcularTotal()">
+                <option value="0">-- Selecione um veiculo --</option>
+                @foreach (var v in (List<DriveNow.Models.Veiculo>)ViewBag.VeiculosList)
+                {
+                    <option value="@v.IdVeiculo"
+                            data-diaria="@v.ValorDiaria.ToString("F2", System.Globalization.CultureInfo.InvariantCulture)">
+                        @v.Marca @v.Modelo &mdash; @v.Placa &nbsp;&nbsp;(R$ @v.ValorDiaria.ToString("N2")/dia)
+                    </option>
+                }
+            </select>
+        </div>
+
+        <div class="form-linha">
+            <div class="form-grupo">
+                <label>Data de Retirada *</label>
+                @Html.TextBoxFor(m => m.DataRetirada, "{0:yyyy-MM-dd}", new {
+                    @class   = "form-control",
+                    type     = "date",
+                    onchange = "calcularTotal()"
+                })
+            </div>
+            <div class="form-grupo">
+                <label>Data de Devolucao *</label>
+                @Html.TextBoxFor(m => m.DataDevolucao, "{0:yyyy-MM-dd}", new {
+                    @class   = "form-control",
+                    type     = "date",
+                    onchange = "calcularTotal()"
+                })
+            </div>
+        </div>
+
+        <div class="form-grupo">
+            <label>Observacao</label>
+            @Html.TextAreaFor(m => m.Observacao, new {
+                @class      = "form-control",
+                rows        = "3",
+                placeholder = "Alguma observacao sobre esta locacao..."
+            })
+        </div>
+
+        <div id="estimativa" class="estimativa-box" style="display:none;">
+            <strong id="textoEstimativa"></strong>
+        </div>
+
+        <div class="form-botoes">
+            <button type="submit" class="btn btn-primario">Registrar Locacao</button>
+            <a href="/Locacoes/Index" class="btn btn-secundario">Cancelar</a>
+        </div>
+    }
+</div>

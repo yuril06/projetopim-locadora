@@ -1,0 +1,59 @@
+@model List<DriveNow.Models.Cliente>
+@{
+    ViewBag.Title = "Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="barra-acoes">
+    <h2>Lista de Clientes</h2>
+    <a href="/Clientes/Novo" class="btn btn-primario">+ Novo Cliente</a>
+</div>
+
+<div class="tabela-wrap">
+    @if (Model.Count == 0)
+    {
+        <p class="sem-dados">Nenhum cliente cadastrado ainda.</p>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Nome</th>
+                    <th>CPF</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                    <th>CNH</th>
+                    <th>Cadastro</th>
+                    <th>Acoes</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model)
+                {
+                    <tr>
+                        <td>@c.IdCliente</td>
+                        <td><strong>@c.Nome</strong></td>
+                        <td>@c.Cpf</td>
+                        <td>@c.Telefone</td>
+                        <td>@c.Email</td>
+                        <td>@c.Cnh</td>
+                        <td>@c.DataCadastro.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <div class="btn-acoes">
+                                <a href="/Clientes/Editar/@c.IdCliente"
+                                   class="btn btn-editar">Editar</a>
+                                <a href="/Clientes/Excluir/@c.IdCliente"
+                                   class="btn btn-perigo"
+                                   onclick="return confirmarExclusao('Excluir o cliente @Html.Raw(c.Nome)?')">
+                                    Excluir
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>

@@ -1,0 +1,55 @@
+@model DriveNow.Models.Cliente
+@{
+    ViewBag.Title = "Editar Cliente";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@if (ViewBag.Erro != null)
+{
+    <div class="alerta erro" style="margin:20px 30px 0;">&#9888; @ViewBag.Erro</div>
+}
+
+<div class="form-wrap">
+    @using (Html.BeginForm("Editar", "Clientes", FormMethod.Post))
+    {
+        @Html.HiddenFor(m => m.IdCliente)
+
+        <div class="form-grupo">
+            <label>CPF (nao pode ser alterado)</label>
+            <input type="text" value="@Model.Cpf" disabled class="form-control"
+                   style="background:#f0f0f0;cursor:not-allowed;" />
+        </div>
+
+        <div class="form-linha">
+            <div class="form-grupo">
+                <label>Nome completo *</label>
+                @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+            </div>
+            <div class="form-grupo">
+                <label>Telefone</label>
+                @Html.TextBoxFor(m => m.Telefone, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-linha">
+            <div class="form-grupo">
+                <label>Email</label>
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            </div>
+            <div class="form-grupo">
+                <label>CNH</label>
+                @Html.TextBoxFor(m => m.Cnh, new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-grupo">
+            <label>Endereco</label>
+            @Html.TextBoxFor(m => m.Endereco, new { @class = "form-control" })
+        </div>
+
+        <div class="form-botoes">
+            <button type="submit" class="btn btn-primario">Salvar Alteracoes</button>
+            <a href="/Clientes/Index" class="btn btn-secundario">Voltar</a>
+        </div>
+    }
+</div>

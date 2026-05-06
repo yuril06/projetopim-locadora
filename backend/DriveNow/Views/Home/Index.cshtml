@@ -1,0 +1,42 @@
+@{
+    ViewBag.Title = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="cards-dashboard">
+    <div class="card">
+        <span class="numero">@ViewBag.TotalClientes</span>
+        <span class="label">Clientes Cadastrados</span>
+    </div>
+    <div class="card">
+        <span class="numero">@ViewBag.TotalVeiculos</span>
+        <span class="label">Veiculos na Frota</span>
+    </div>
+    <div class="card verde">
+        <span class="numero">@ViewBag.Disponiveis</span>
+        <span class="label">Disponiveis Agora</span>
+    </div>
+    <div class="card laranja">
+        <span class="numero">@ViewBag.LocacoesAtivas</span>
+        <span class="label">Locacoes em Aberto</span>
+    </div>
+</div>
+
+<div class="secao">
+    <h2>Acesso Rapido</h2>
+    <div class="atalhos">
+        <a href="/Clientes/Novo"    class="btn-atalho">+ Novo Cliente</a>
+        <a href="/Veiculos/Novo"    class="btn-atalho">+ Novo Veiculo</a>
+        <a href="/Locacoes/Nova"    class="btn-atalho">+ Nova Locacao</a>
+    </div>
+</div>
+
+<div class="secao">
+    <h2>Sobre o Sistema</h2>
+    <p style="font-size:14px;color:#666;line-height:1.7;">
+        Sistema web de gerenciamento da <strong>DriveNow Locadora</strong>.
+        Permite cadastrar clientes, controlar a frota de veiculos e registrar locacoes com
+        calculo automatico do valor total. Desenvolvido como projeto academico utilizando
+        ASP.NET MVC com banco de dados SQL Server.
+    </p>
+</div>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewBag.Title - DriveNow</title>
+    <link rel="stylesheet" href="~/css/style.css" />
+</head>
+<body>
+    <div class="wrapper">
+
+        <aside class="sidebar">
+            <div class="logo">
+                <h2>Drive<span>Now</span></h2>
+                <small>Locadora de Carros</small>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="/Home/Index">Dashboard</a></li>
+                    <li><a href="/Clientes/Index">Clientes</a></li>
+                    <li><a href="/Veiculos/Index">Veiculos</a></li>
+                    <li><a href="/Locacoes/Index">Locacoes</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-rodape">
+                <span class="usuario-logado">&#128100; @ViewBag.UsuarioLogado</span>
+                <a href="/Usuarios/Logout" class="btn-logout">Sair</a>
+            </div>
+        </aside>
+
+        <main class="conteudo">
+            <header class="topo">
+                <h1>@ViewBag.Title</h1>
+                <span class="data-hora">@DateTime.Now.ToString("dd/MM/yyyy")</span>
+            </header>
+
+            @if (TempData["Sucesso"] != null)
+            {
+                <div class="alerta sucesso">&#10003; @TempData["Sucesso"]</div>
+            }
+
+            @RenderBody()
+        </main>
+
+    </div>
+    <script src="~/js/main.js"></script>
+</body>
+</html>
